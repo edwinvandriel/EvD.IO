@@ -23,4 +23,7 @@ This class creates a row with a width of 80 characters. Also with *Column1* on p
 var writer = new FixedWriter<Line>();
 var rows = writer.ToFixedPositionString(lines);
 ```
-In this example *lines* is a collections rows of type *Line*.
+In this example *lines* is a collection of type *Line*.
+
+The idea for creating this library started when I needed a fixed position file to import data into oracle.
+
