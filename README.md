@@ -16,7 +16,7 @@ The class you create presents the row in your file or report. Example of a class
     }
 ```
 
-This class creates a row with a width of 80 characters. Also with *Column1* on position **1** until **30** and *Column2* on position **35** until **45**.
+This class creates a row with length of 80 characters. *Column1* on position **1** until **30** and *Column2* on position **35** until **45**.
 *Column2* also uses a format. The format syntax is the same as from ``string.Format``.
 
 ```c#

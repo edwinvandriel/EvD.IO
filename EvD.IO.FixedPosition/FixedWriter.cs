@@ -8,6 +8,10 @@ using System.Text;
 
 namespace EvD.IO.FixedPosition
 {
+    /// <summary>
+    /// Class for creating fixed position column rows
+    /// </summary>
+    /// <typeparam name="T">Class to convert</typeparam>
     public class FixedWriter<T> 
     {
         private readonly Type _classInfo;
@@ -17,15 +21,12 @@ namespace EvD.IO.FixedPosition
             _classInfo = typeof(T);
         }
 
-        private int GetRowLength(Type classType)
-        {
-            var rowAttribute = (RowAttribute)classType.GetCustomAttribute(typeof(RowAttribute));
-            if (rowAttribute == null) throw new NotImplementedException("Row attribute not found");
-
-            return rowAttribute.Length;
-        }
-
-        public string ToFixedPositionString(IEnumerable<T> invoices)
+        /// <summary>
+        /// Create lines with fixed columns
+        /// </summary>
+        /// <param name="rows">Collection with objects to convert</param>
+        /// <returns>String with every line a row containing the fixed columns</returns>
+        public string ToFixedPositionString(IEnumerable<T> rows)
         {
             var classType = typeof(T);
 
@@ -33,7 +34,7 @@ namespace EvD.IO.FixedPosition
             var columnConfiguration = GetColumnConfiguration();
 
             var results = new StringBuilder();
-            foreach (var invoice in invoices)
+            foreach (var row in rows)
             {
                 var emptyLine = new string(' ', totalCharacters);
 
@@ -42,11 +43,11 @@ namespace EvD.IO.FixedPosition
                     var columnName = config.Key;
                     var column = config.Value;
 
-                    var rawPropertyValue = classType.GetProperty(columnName).GetValue(invoice);
+                    var rawPropertyValue = classType.GetProperty(columnName).GetValue(row);
                     var propertyValue = rawPropertyValue.ToString();
 
                     if (!String.IsNullOrWhiteSpace(column.Format))
-                        propertyValue = String.Format("{0:" + column.Format + "}", classType.GetProperty(columnName).GetValue(invoice));
+                        propertyValue = String.Format("{0:" + column.Format + "}", classType.GetProperty(columnName).GetValue(row));
 
                     var propertyLength = column.End - column.Start;
 
@@ -64,6 +65,14 @@ namespace EvD.IO.FixedPosition
             }
 
             return results.ToString();
+        }
+
+        private int GetRowLength(Type classType)
+        {
+            var rowAttribute = (RowAttribute)classType.GetCustomAttribute(typeof(RowAttribute));
+            if (rowAttribute == null) throw new NotImplementedException("Row attribute not found");
+
+            return rowAttribute.Length;
         }
 
         private Dictionary<string, IColumnItem> GetColumnConfiguration()
