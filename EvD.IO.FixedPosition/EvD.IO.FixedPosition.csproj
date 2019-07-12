@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Edwin van Driel</Authors>
+    <Copyright />
+    <PackageProjectUrl>https://github.com/edwinvandriel/EvD.IO</PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
+    <Description>Library for creating text lines with columns at fixed positions</Description>
   </PropertyGroup>
 
 </Project>
