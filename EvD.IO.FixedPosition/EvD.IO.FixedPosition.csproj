@@ -8,6 +8,15 @@
     <PackageProjectUrl>https://github.com/edwinvandriel/EvD.IO</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
     <Description>Library for creating text lines with columns at fixed positions</Description>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
